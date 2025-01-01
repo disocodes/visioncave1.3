@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  visioncave:
+    container_name: visioncave
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - ./storage:/storage
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "1935:1935"
+    environment:
+      CUDA_VISIBLE_DEVICES: "0"
+      CONFIG_FILE: "/config/config.yml"
+      
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log

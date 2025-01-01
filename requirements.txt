@@ -1,0 +1,36 @@
+# Core dependencies
+numpy>=1.19.5
+opencv-python-headless>=4.5.3.56
+pydantic>=1.8.2
+PyYAML>=5.4.1
+requests>=2.26.0
+pillow>=8.3.2
+
+# Deep Learning
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+tensorflow>=2.8.0  # For compatibility with existing Frigate features
+
+# Vision-Language Models
+clip @ git+https://github.com/openai/CLIP.git
+timm>=0.6.13
+
+# YOLOv9
+ultralytics>=8.0.0
+
+# Web and API
+fastapi>=0.68.1
+uvicorn>=0.15.0
+python-multipart>=0.0.5
+aiohttp>=3.8.1
+websockets>=10.0
+
+# Database
+SQLAlchemy>=1.4.23
+aiosqlite>=0.17.0
+
+# Utilities
+python-dateutil>=2.8.2
+tzlocal>=4.2
+pytz>=2021.3
